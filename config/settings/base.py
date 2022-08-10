@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.orcid",
     "allauth.socialaccount.providers.twitter",
+    # django bootstrap-v5
+    "bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +76,9 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "vsfeed/templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -87,6 +91,14 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "vsfeed/static",
+]
+
+STATIC_ROOT = BASE_DIR / "vsfeed/static/collected"
+MEDIA_ROOT = BASE_DIR / "vsfeed/media"
+
 
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -113,6 +125,13 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+# Account verification with email instead of password
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
 
 SITE_ID = 1
 
@@ -135,9 +154,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "vsfeed/static"
-
-MEDIA_ROOT = BASE_DIR / "vsfeed/media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
