@@ -92,11 +92,15 @@ TEMPLATES = [
     },
 ]
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.1/howto/static-files/
+
+STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "vsfeed/static",
 ]
-
-STATIC_ROOT = BASE_DIR / "vsfeed/static/collected"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_ROOT = BASE_DIR / "vsfeed/media"
 
 
@@ -148,12 +152,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
