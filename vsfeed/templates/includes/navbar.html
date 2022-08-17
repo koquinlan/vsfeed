@@ -7,8 +7,10 @@
         <a class="navbar-brand mt-2 mt-lg-0" href="">VsFeed</a>
 
         <!-- Right elements -->
+
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <!-- Avatar -->
+            {% if user.is_authenticated %}
             <!-- Icon dropdown -->
             <li class="nav-item me-3 me-lg-0 dropdown">
                 <a class="nav-link dropdown-toggle hidden-arrow" href="#" id="navbarDropdown" role="button"
@@ -30,6 +32,14 @@
                     </li>
                 </ul>
             </li>
+            {% else %}
+            <a type="button" class="btn btn-link px-3 me-2" href="/accounts/login">
+                Login
+            </a>
+            <a type="button" class="btn btn-primary btn-rounded me-3" href="/accounts/signup">
+                Sign up for free
+            </a>
+            {% endif %}
         </ul>
         <!-- Right elements -->
     </div>
