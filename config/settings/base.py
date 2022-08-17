@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     # project apps
+    "home",
     # django all-auth
     "allauth",
     "allauth.account",
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.twitter",
     # django bootstrap-v5
     "bootstrap5",
+    # advanced password validators
+    "django_advanced_password_validation",
 ]
 
 MIDDLEWARE = [
@@ -112,16 +115,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 10,
+        },
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django_advanced_password_validation.advanced_password_validation.ContainsDigitsValidator",
+        "OPTIONS": {
+            "min_digits": 1,
+        },
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django_advanced_password_validation.advanced_password_validation.ContainsUppercaseValidator",
+        "OPTIONS": {
+            "min_uppercase": 1,
+        },
+    },
+    {
+        "NAME": "django_advanced_password_validation.advanced_password_validation.ContainsLowercaseValidator",
+        "OPTIONS": {
+            "min_lowercase": 1,
+        },
     },
 ]
 
@@ -129,17 +144,19 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+
 # Account verification with email instead of password
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = "/home"
+LOGIN_REDIRECT_URL = "/"
 
 
 # Internationalization
